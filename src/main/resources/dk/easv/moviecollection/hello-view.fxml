@@ -8,8 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="568.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.moviecollection.gui.HelloController">
+<AnchorPane prefHeight="568.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.moviecollection.gui.MainController">
    <children>
    
           <Label fx:id="welcomeText" />
@@ -18,17 +17,17 @@
       <Button layoutX="14.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnOnNewCategory" text="Add a category" />
       <Button layoutX="131.0" layoutY="525.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Remove a category" />
        <Button layoutX="638.0" layoutY="44.0" onAction="#onHelloButtonClick" text="Rate" />
-      <TableView layoutX="264.0" layoutY="141.0" prefHeight="378.0" prefWidth="414.0">
+      <TableView fx:id="tblMovies" layoutX="264.0" layoutY="141.0" prefHeight="378.0" prefWidth="414.0">
         <columns>
-          <TableColumn prefWidth="245.60003662109375" text="Title" />
+          <TableColumn fx:id="clmTitle" prefWidth="245.60003662109375" text="Title" />
           <TableColumn prefWidth="105.5999755859375" text="Genre" />
-            <TableColumn prefWidth="56.0" text="Score" />
+            <TableColumn fx:id="clmRating" prefWidth="56.0" text="Score" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ListView layoutX="14.0" layoutY="141.0" prefHeight="378.0" prefWidth="233.0" />
+      <ListView fx:id="lstCategories" layoutX="14.0" layoutY="141.0" prefHeight="378.0" prefWidth="233.0" />
       <TextField layoutX="264.0" layoutY="107.0" prefHeight="26.0" prefWidth="202.0" promptText="&lt;Search&gt;" />
       <TextField layoutX="482.0" layoutY="44.0" promptText="&lt;Give score&gt;" />
    </children>
