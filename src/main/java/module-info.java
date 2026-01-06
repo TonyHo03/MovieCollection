@@ -7,4 +7,6 @@ module dk.easv.moviecollection {
 
     opens dk.easv.moviecollection to javafx.fxml;
     exports dk.easv.moviecollection;
+    exports dk.easv.moviecollection.gui;
+    opens dk.easv.moviecollection.gui to javafx.fxml;
 }

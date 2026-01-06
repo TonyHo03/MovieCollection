@@ -1,4 +1,4 @@
-package dk.easv.moviecollection;
+package dk.easv.moviecollection.gui;
 
 public class removeMovieController {
 }
