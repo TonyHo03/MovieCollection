@@ -47,7 +47,7 @@
                         <HBox prefHeight="35.0" prefWidth="310.0">
                            <children>
                               <Label prefHeight="17.0" prefWidth="29.0" text="Title: " />
-                              <TextField>
+                              <TextField fx:id="txtMovieTitle">
                                  <HBox.margin>
                                     <Insets left="15.0" />
                                  </HBox.margin></TextField>
@@ -59,7 +59,7 @@
                         <HBox prefHeight="35.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="17.0" prefWidth="55.0" text="Category: " />
-                              <TextField>
+                              <TextField fx:id="txtMovieCategory">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin></TextField>
