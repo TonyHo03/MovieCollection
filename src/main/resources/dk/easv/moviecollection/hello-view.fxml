@@ -28,7 +28,8 @@
          </columnResizePolicy>
       </TableView>
       <ListView fx:id="lstCategories" layoutX="14.0" layoutY="141.0" prefHeight="378.0" prefWidth="233.0" />
-      <TextField layoutX="264.0" layoutY="107.0" prefHeight="26.0" prefWidth="202.0" promptText="&lt;Search&gt;" />
+      <TextField fx:id="txtFldFilter" layoutX="264.0" layoutY="107.0" prefHeight="26.0" prefWidth="202.0" promptText="&lt;movie name&gt;" />
       <TextField layoutX="482.0" layoutY="44.0" promptText="&lt;Give score&gt;" />
+      <Button fx:id="btnSearch" layoutX="471.0" layoutY="108.0" mnemonicParsing="false" onAction="#onSearchBtnClick" text="Search" />
    </children>
 </AnchorPane>

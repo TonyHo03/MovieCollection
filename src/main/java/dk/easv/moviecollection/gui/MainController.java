@@ -3,15 +3,15 @@ package dk.easv.moviecollection.gui;
 import dk.easv.moviecollection.BE.Category;
 import dk.easv.moviecollection.BE.Movie;
 import dk.easv.moviecollection.gui.model.MovieModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,6 +34,12 @@ public class MainController implements Initializable {
     private TableColumn<Movie, String> clmTitle;
     @FXML
     private TableColumn<Movie, Float> clmRating;
+    @FXML
+    private Button btnSearch;
+    @FXML
+    private TextField txtFldFilter;
+
+    private boolean isFiltering = false;
 
     public MainController() {
 
@@ -108,5 +114,50 @@ public class MainController implements Initializable {
 
         }
     }
+
+    @FXML
+    private void onSearchBtnClick() {
+
+        if (!isFiltering) {
+            //Search button indicates the filter is on
+            btnSearch.setText("C");
+
+            FilteredList<Movie> filteredList = new FilteredList<>(MovieModel.getMovieObservableList());
+
+            filteredList.setPredicate(movie -> matchesFilter(movie, txtFldFilter.getText()) );
+
+            tblMovies.setItems(FXCollections.observableArrayList(filteredList)); }
+        else { btnSearch.setText("\uD83D\uDD0E");
+
+            txtFldFilter.clear();
+
+            tblMovies.setItems(MovieModel.getMovieObservableList()); }
+
+        isFiltering = !isFiltering;
     }
+
+    private boolean matchesFilter(Movie movie, String filterText) {
+
+        if (filterText == null || filterText.isBlank()) {
+            return true;
+        }
+
+        String filter = filterText.toLowerCase().trim();
+
+        // Title match
+        if (movie.getTitle().toLowerCase().contains(filter)) {
+            return true;
+        }
+
+        // Rating match
+        try {
+            float ratingFilter = Float.parseFloat(filter);
+            return movie.getRating() >= ratingFilter;
+        } catch (NumberFormatException ignored) {}
+
+        return false;
+    }
+
+
+}
 

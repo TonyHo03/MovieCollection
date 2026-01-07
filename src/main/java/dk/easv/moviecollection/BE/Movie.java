@@ -8,13 +8,28 @@ private String title;
 private String category;
 private String filePath;
 public Date lastOpened;
-public String rating;
+public float rating;
 
-public Movie(String title, String category, String filePath, String lastOpened, String rating){
+public Movie(String title, String category, String filePath, String lastOpened, float rating){
     this.title = title;
     this.category = category;
     this.filePath = filePath;
     this.lastOpened = Time.valueOf(lastOpened);
-    this.rating = rating;
+    this.rating = Float.parseFloat(String.valueOf(rating));
+
 }
+
+
+    public String getTitle() {
+    return title;
+    }
+    public void setTitle(String title) {
+    this.title = title;
+    }
+    public float getRating() {
+    return rating;
+    }
+    public void setRating(float rating) {
+    this.rating = rating;
+    }
 }
