@@ -16,9 +16,10 @@ public class AddMovieController
     public TextField txtFilePath;
     public TextField txtDate;
     public TextField txtRating;
-    public void btnAddMovie(ActionEvent actionEvent) {
+    public void btnAddMovie(ActionEvent actionEvent) throws Exception {
 
         Movie newMovie = new Movie(txtMovieTitle.getText(), txtMovieCategory.getText(), txtFilePath.getText(), txtDate.getText(), txtRating.getText());
+        MovieDAO.createMovie(newMovie);
 
 
     }

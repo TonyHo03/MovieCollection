@@ -1,8 +1,8 @@
 package dk.easv.moviecollection.bll;
 
 import dk.easv.moviecollection.BE.Movie;
-import dk.easv.moviecollection.dal.IMovieCollectionDataAccess;
-import dk.easv.moviecollection.dal.MovieCollectionDAO_DB;
+import dk.easv.moviecollection.dal.db.IMovieCollectionDataAccess;
+import dk.easv.moviecollection.dal.db.MovieCollectionDAO_DB;
 
 import java.util.List;
 
