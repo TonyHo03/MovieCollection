@@ -61,7 +61,8 @@ public class MainController implements Initializable {
         clmRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
         try {
-            tblMovies.setItems(movieModel.getMovieObservableList());
+            movieModel = new MovieModel();
+            tblMovies.setItems(MovieModel.getMovieObservableList());
             lstCategories.setItems(movieModel.getCategoryObservableList());
         }
         catch (Exception e) {
