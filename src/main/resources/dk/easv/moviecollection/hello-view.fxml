@@ -20,7 +20,7 @@
       <TableView fx:id="tblMovies" layoutX="264.0" layoutY="141.0" prefHeight="378.0" prefWidth="414.0">
         <columns>
           <TableColumn fx:id="clmTitle" prefWidth="245.60003662109375" text="Title" />
-          <TableColumn prefWidth="105.5999755859375" text="Genre" />
+          <TableColumn fx:id="clmGenre" prefWidth="105.5999755859375" text="Genre" />
             <TableColumn fx:id="clmRating" prefWidth="56.0" text="Score" />
         </columns>
          <columnResizePolicy>
