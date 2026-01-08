@@ -4,6 +4,7 @@ module dk.easv.moviecollection {
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
     requires java.naming;
+    requires java.desktop;
 
     opens dk.easv.moviecollection to javafx.fxml;
     exports dk.easv.moviecollection;

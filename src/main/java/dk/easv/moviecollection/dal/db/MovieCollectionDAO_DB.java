@@ -21,10 +21,16 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
     @Override
     public void createMovie(Movie movie) throws Exception {
-        String insertSql = "INSERT INTO dbo.Movie (Title, Category, FilePath, lastOpened, rating) VALUES (?, ?, ?, ?, ?)";
+        String insertSql = "INSERT INTO dbo.Movie (Title, Genre, Score) VALUES (?, ?, ?)";
         try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(insertSql);
+            preparedStatement.setString(1,movie.getTitle());
+            preparedStatement.setString(2,movie.getCategory());
+            preparedStatement.setString(3,movie.getRating());
             preparedStatement.executeUpdate();
+
+
+
 
         }
 

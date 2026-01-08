@@ -27,7 +27,7 @@
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin></Label>
-                              <TextField fx:id="txtMovieFile">
+                              <TextField fx:id="txtFilePath">
                                  <HBox.margin>
                                     <Insets left="15.0" />
                                  </HBox.margin></TextField>
@@ -72,12 +72,13 @@
                               <children>
                                  <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
+                                       <Label text="Rating: " />
                                        <TextField fx:id="txtMovieRating" />
                                     </children>
                                  </HBox>
                               </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#btnAddMovie" text="Add Movie" />
+                        <Button fx:id="onBtnAddMovie" mnemonicParsing="false" onAction="#onBtnAddMovie" text="Add Movie" />
                      </children>
                   </VBox>
                </children></AnchorPane>

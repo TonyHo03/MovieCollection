@@ -1,20 +1,33 @@
 package dk.easv.moviecollection.BE;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class Movie {
-private String title;
+public String title;
 private String category;
 private String filePath;
 public Date lastOpened;
-public String rating;
+public String score;
 
-public Movie(String title, String category, String filePath, String lastOpened, String rating){
+public Movie(String title, String category, String score){
     this.title = title;
     this.category = category;
-    this.filePath = filePath;
-    this.lastOpened = Time.valueOf(lastOpened);
-    this.rating = rating;
+    //this.filePath = filePath;
+    //this.lastOpened = Time.valueOf(lastOpened);
+    this.score = score;
 }
+
+public String getTitle(){
+    return title;
+}
+
+public String getCategory(){
+    return category;
+}
+
+public String getRating(){
+    return score;
+}
+
+
 }

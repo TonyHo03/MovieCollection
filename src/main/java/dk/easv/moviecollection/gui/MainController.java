@@ -51,6 +51,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         clmTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         clmRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
