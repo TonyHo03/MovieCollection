@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
@@ -30,9 +31,7 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
             preparedStatement.executeUpdate();
 
         }
-
-
-        }
+    }
 
     @Override
     public void deleteMovie() throws Exception {
@@ -52,19 +51,28 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
     @Override
     public List<Movie> loadMovies() {
         List<Movie> movies = new ArrayList<>();
-        String sql = "SELECT name, rating FROM Movie"; try (Connection conn = dbConnector.getConnection();
+        String sql = "SELECT * FROM Movie";
 
-        PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) { while
-        (rs.next())
-        { String title = rs.getString("name");
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-            float rating = rs.getFloat("rating");
+            while (rs.next()) {
 
-            movies.add(new Movie(title, rating)); } }
+                int id = rs.getInt("id");
+                String title = rs.getString("name");
+                float rating = rs.getFloat("rating");
+                String filelink = rs.getString("filelink");
+                Date lastOpened = rs.getDate("lastview");
 
+                movies.add(new Movie(id, title, null, rating, filelink, lastOpened));
+            }
+
+        }
         catch (SQLException e)
-
-        { e.printStackTrace(); }
+        {
+            e.printStackTrace();
+        }
 
         return movies;
 
@@ -73,7 +81,28 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
     @Override
     public List<Category> loadCategories() {
-        return List.of();
+        List<Category> categories = new ArrayList<>();
+        String sql = "SELECT * FROM Category";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+
+                String name = rs.getString("name");
+
+                categories.add(new Category(id, name));
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return categories;
     }
 }
 

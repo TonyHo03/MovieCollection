@@ -18,7 +18,6 @@ public class CategoryManager {
         return movieDAO.loadCategories();
 
     }
-
 }
 
 
