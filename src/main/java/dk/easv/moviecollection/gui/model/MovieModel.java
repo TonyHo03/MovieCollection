@@ -14,7 +14,7 @@ public class MovieModel {
     private MovieManager movieManager = new MovieManager();
     private CategoryManager categoryManager = new CategoryManager();
 
-    private ObservableList<Movie> movieObservableList;
+    private static ObservableList<Movie> movieObservableList;
     private ObservableList<Category> categoryObservableList;
 
     public MovieModel() throws Exception {
@@ -26,7 +26,7 @@ public class MovieModel {
 
     }
 
-    public ObservableList<Movie> getMovieObservableList() {
+    public static ObservableList<Movie> getMovieObservableList() {
         return movieObservableList;
     }
 
