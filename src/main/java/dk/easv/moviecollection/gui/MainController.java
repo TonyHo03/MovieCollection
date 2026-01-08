@@ -161,5 +161,9 @@ public class MainController implements Initializable {
     }
 
 
+    public void onDeleteCategoryClick(ActionEvent actionEvent) {
+
+
+    }
 }
 
