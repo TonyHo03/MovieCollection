@@ -51,7 +51,10 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
     @Override
     public List<Movie> loadMovies() {
+        //a list to store the movies loaded from database
         List<Movie> movies = new ArrayList<>();
+
+        //selects the relevant columns
         String sql = "SELECT name, rating FROM Movie"; try (Connection conn = dbConnector.getConnection();
 
         PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) { while
@@ -73,7 +76,25 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
     @Override
     public List<Category> loadCategories() {
-        return List.of();
+        //a list to store the categories loaded from database
+        List<Category> categories = new ArrayList<>();
+
+        //selects the relevant columns
+        String sql = "SELECT id, name FROM Category"; try (Connection conn = dbConnector.getConnection();
+
+        PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) { while
+        (rs.next())
+        { int id = rs.getInt("id");
+
+            String name = rs.getString("name");
+
+            categories.add(new Category(id, name)); } }
+
+        catch (SQLException e)
+
+        { e.printStackTrace(); }
+
+        return categories;
     }
 }
 
