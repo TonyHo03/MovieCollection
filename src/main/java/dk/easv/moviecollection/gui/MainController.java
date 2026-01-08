@@ -2,6 +2,7 @@ package dk.easv.moviecollection.gui;
 
 import dk.easv.moviecollection.BE.Category;
 import dk.easv.moviecollection.BE.Movie;
+import dk.easv.moviecollection.dal.db.MovieCollectionDAO_DB;
 import dk.easv.moviecollection.gui.model.MovieModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -161,8 +162,17 @@ public class MainController implements Initializable {
 
 
     public void onDeleteCategoryClick(ActionEvent actionEvent) {
+        Category selectedCategory = lstCategories.getFocusModel().getFocusedItem();
 
+        if (selectedCategory != null) {
+            try {
+            MovieModel.deleteCategory(selectedCategory);
 
+            System.out.println(MovieModel.getCategory());
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

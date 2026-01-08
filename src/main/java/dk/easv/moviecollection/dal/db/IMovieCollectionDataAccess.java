@@ -13,7 +13,7 @@ public interface IMovieCollectionDataAccess {
 
     void createCategory() throws Exception;
 
-    void deleteCategory() throws Exception;
+    void deleteCategory(Category category) throws Exception;
 
     List<Movie> loadMovies();
 

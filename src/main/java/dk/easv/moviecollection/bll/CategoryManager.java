@@ -19,6 +19,9 @@ public class CategoryManager {
 
     }
 
+    public void deleteCategory(Category category) throws Exception {
+        movieDAO.deleteCategory(category);
+    }
 }
 
 
