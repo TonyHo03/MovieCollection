@@ -101,7 +101,7 @@ public class MainController implements Initializable {
     public void btnOnNewCategory(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dk/easv/moviecollection/addCategory.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load(), 310, 218);
             Stage stage = new Stage();
             stage.setTitle("New category");
 
