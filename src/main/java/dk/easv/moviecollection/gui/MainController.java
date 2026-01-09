@@ -168,8 +168,23 @@ public class MainController implements Initializable {
             try {
             MovieModel.deleteCategory(selectedCategory);
 
-            System.out.println(MovieModel.getCategory());
+            System.out.println(movieModel.getCategory());
         } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void onDeleteMovieClick(ActionEvent actionEvent) {
+        Movie selectedMovie = tblMovies.getFocusModel().getFocusedItem();
+
+        if (selectedMovie != null) {
+            try {
+                movieModel.deleteMovie(selectedMovie);
+
+                System.out.println(MovieModel.getMovie());
+            }
+            catch (Exception e)  {
                 e.printStackTrace();
             }
         }

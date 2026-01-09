@@ -24,7 +24,6 @@ public Movie(String title, String category, String filePath, String lastOpened, 
         this.rating = rating;
     }
 
-
     public String getTitle() {
     return title;
     }

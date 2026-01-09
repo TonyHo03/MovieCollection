@@ -17,5 +17,7 @@ public class MovieManager {
         return movieDAO.loadMovies();
 
     }
-
+    public void deleteMovie(Movie movie) throws Exception {
+        movieDAO.deleteMovie(movie);
+    }
 }
