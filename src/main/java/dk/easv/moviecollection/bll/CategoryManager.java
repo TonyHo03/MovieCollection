@@ -18,6 +18,18 @@ public class CategoryManager {
         return movieDAO.loadCategories();
 
     }
+
+    public void createCategory(Category category) throws Exception {
+
+        movieDAO.createCategory(category);
+
+    }
+
+    public void deleteCategory(Category category) throws Exception {
+
+        movieDAO.deleteCategory(category);
+
+    }
 }
 
 

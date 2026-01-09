@@ -88,7 +88,8 @@ public class MainController implements Initializable {
 
             stage.initModality(Modality.APPLICATION_MODAL);
 
-
+            AddMovieController addMovieController = fxmlLoader.getController();
+            addMovieController.initializeClass(movieModel, stage);
 
             stage.setScene(scene);
             stage.show();
@@ -107,7 +108,8 @@ public class MainController implements Initializable {
 
             stage.initModality(Modality.APPLICATION_MODAL);
 
-
+            AddCategoryController addCategoryController = fxmlLoader.getController();
+            addCategoryController.initializeClass(movieModel, stage);
 
             stage.setScene(scene);
             stage.show();
@@ -166,7 +168,7 @@ public class MainController implements Initializable {
 
         if (selectedCategory != null) {
             try {
-            MovieModel.deleteCategory(selectedCategory);
+            movieModel.deleteCategory(selectedCategory);
 
             System.out.println(MovieModel.getCategory());
         } catch (Exception e) {

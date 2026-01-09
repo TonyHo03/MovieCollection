@@ -4,11 +4,9 @@ import dk.easv.moviecollection.BE.Category;
 import dk.easv.moviecollection.BE.Movie;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
@@ -18,21 +16,23 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
     public MovieCollectionDAO_DB() throws IOException {
     }
 
-
-
-
-
     @Override
     public void createMovie(Movie movie) throws Exception {
-        String insertSql = "INSERT INTO dbo.Movie (Title, Category, FilePath, lastOpened, rating) VALUES (?, ?, ?, ?, ?)";
+        String insertSql = "INSERT INTO dbo.Movie (title, rating, filelink, lastview) VALUES (?, ?, ?, ?)";
+
         try (Connection conn = dbConnector.getConnection()) {
+
             PreparedStatement preparedStatement = conn.prepareStatement(insertSql);
             preparedStatement.executeUpdate();
 
         }
+        catch (SQLException e) {
 
+            throw new Exception("Could not create movie", e);
 
         }
+
+    }
 
     @Override
     public void deleteMovie() throws Exception {
@@ -40,8 +40,15 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
     }
 
     @Override
-    public void createCategory() throws Exception {
+    public void createCategory(Category category) throws Exception {
 
+        try (Connection conn = dbConnector.getConnection()){
+
+            PreparedStatement stmt1 = conn.prepareStatement("INSERT INTO dbo.Category VALUES (?)");
+            stmt1.setString(1, category.getName());
+            stmt1.executeUpdate();
+
+        }
     }
 
     @Override
@@ -74,19 +81,54 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
         List<Movie> movies = new ArrayList<>();
 
         //selects the relevant columns
-        String sql = "SELECT name, rating FROM Movie"; try (Connection conn = dbConnector.getConnection();
+        String sql = "SELECT * FROM Movie";
 
-        PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) { while
-        (rs.next())
-        { String title = rs.getString("name");
+        try (Connection conn = dbConnector.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery())
+        {
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String title = rs.getString("name");
+                float rating = rs.getFloat("rating");
+                String filelink = rs.getString("filelink");
+                Date lastOpened = rs.getDate("lastview");
 
-            float rating = rs.getFloat("rating");
+                PreparedStatement categorystmt = conn.prepareStatement("SELECT Category.Name FROM Category JOIN CatMovie ON Category.id = CatMovie.CategoryId JOIN Movie ON Movie.id = CatMovie.MovieId WHERE Movie.id = ?");
+                categorystmt.setInt(1, id);
 
-            movies.add(new Movie(title, rating)); } }
+                ResultSet rs2 = categorystmt.executeQuery();
+                String categories = "";
+
+                while (rs2.next()) {
+
+                    categories = rs.getString("Name") + ":";
+
+                }
+
+                char[] catCharArray = categories.toCharArray();
+
+                if (catCharArray.length != 0) {
+                    if (catCharArray[catCharArray.length - 1] == ':') {
+                        char[] newCharArray = Arrays.copyOfRange(catCharArray, 0, catCharArray.length - 2);
+                        categories = String.valueOf(newCharArray);
+                    }
+                }
+                else {
+                    System.out.println("Har ingen genre.");
+                }
+                System.out.println(categories);
+
+                movies.add(new Movie(id, title, categories, rating, filelink, lastOpened));
+
+            }
+
+        }
 
         catch (SQLException e)
-
-        { e.printStackTrace(); }
+        {
+            e.printStackTrace();
+        }
 
         return movies;
 
@@ -99,7 +141,7 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
         List<Category> categories = new ArrayList<>();
 
         //selects the relevant columns
-        String sql = "SELECT id, name FROM Category"; try (Connection conn = dbConnector.getConnection();
+        String sql = "SELECT * FROM Category"; try (Connection conn = dbConnector.getConnection();
 
         PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) { while
         (rs.next())

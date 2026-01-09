@@ -16,7 +16,7 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="233.0" prefWidth="310.0">
                      <children>
                         <Label layoutX="81.0" layoutY="44.0" prefHeight="17.0" prefWidth="70.0" text="Category: " />
-                        <TextField layoutX="81.0" layoutY="70.0" />
+                        <TextField fx:id="txtFldCategory" layoutX="81.0" layoutY="70.0" />
                         <Button layoutX="110.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnOnAddCategory" text="Add Category" />
                      </children>
                   </AnchorPane>

@@ -50,7 +50,15 @@ public class MovieModel {
         return categoryObservableList;
     }
 
-    public static void deleteCategory(Category category) throws Exception {
+    public void createCategory(Category category) throws Exception {
+
+        categoryManager.createCategory(category);
+
+        categoryObservableList.add(category);
+
+    }
+
+    public void deleteCategory(Category category) throws Exception {
         categoryManager.deleteCategory(category);
 
         categoryObservableList.remove(category);
@@ -60,6 +68,12 @@ public class MovieModel {
     public List<Movie> loadMovies() throws Exception {
 
         return movieManager.loadMovies();
+
+    }
+
+    public void createMovie(Movie movie) throws Exception {
+
+        movieManager.createMovie(movie);
 
     }
 
