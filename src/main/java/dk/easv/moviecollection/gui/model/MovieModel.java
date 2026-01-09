@@ -11,16 +11,7 @@ import java.util.List;
 
 public class MovieModel {
 
-    private static MovieManager movieManager;
-
-    static {
-        try {
-            movieManager = new MovieManager();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    private MovieManager movieManager = new MovieManager();
     private static CategoryManager categoryManager;
 
     static {
@@ -42,9 +33,6 @@ public class MovieModel {
         categoryObservableList.setAll(loadCategories());
 
     }
-    public static List<Movie> getMovie()  {
-        return movieObservableList;
-    }
 
     public static ObservableList<Movie> getMovieObservableList() {
         return movieObservableList;
@@ -62,14 +50,15 @@ public class MovieModel {
         return categoryObservableList;
     }
 
+    public void createCategory(Category category) throws Exception {
 
-    public void deleteMovie(Movie movie) throws Exception {
-        movieManager.deleteMovie(movie);
+        categoryManager.createCategory(category);
 
-        movieObservableList.remove(movie);
+        categoryObservableList.add(category);
+
     }
 
-    public static void deleteCategory(Category category) throws Exception {
+    public void deleteCategory(Category category) throws Exception {
         categoryManager.deleteCategory(category);
 
         categoryObservableList.remove(category);
@@ -79,6 +68,12 @@ public class MovieModel {
     public List<Movie> loadMovies() throws Exception {
 
         return movieManager.loadMovies();
+
+    }
+
+    public void createMovie(Movie movie) throws Exception {
+
+        movieManager.createMovie(movie);
 
     }
 

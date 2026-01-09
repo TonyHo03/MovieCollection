@@ -88,7 +88,8 @@ public class MainController implements Initializable {
 
             stage.initModality(Modality.APPLICATION_MODAL);
 
-
+            AddMovieController addMovieController = fxmlLoader.getController();
+            addMovieController.initializeClass(movieModel, stage);
 
             stage.setScene(scene);
             stage.show();
@@ -101,13 +102,14 @@ public class MainController implements Initializable {
     public void btnOnNewCategory(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dk/easv/moviecollection/addCategory.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load(), 310, 218);
             Stage stage = new Stage();
             stage.setTitle("New category");
 
             stage.initModality(Modality.APPLICATION_MODAL);
 
-
+            AddCategoryController addCategoryController = fxmlLoader.getController();
+            addCategoryController.initializeClass(movieModel, stage);
 
             stage.setScene(scene);
             stage.show();
@@ -166,7 +168,7 @@ public class MainController implements Initializable {
 
         if (selectedCategory != null) {
             try {
-            MovieModel.deleteCategory(selectedCategory);
+            movieModel.deleteCategory(selectedCategory);
 
             System.out.println(movieModel.getCategory());
         } catch (Exception e) {

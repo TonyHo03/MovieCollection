@@ -1,58 +1,70 @@
 package dk.easv.moviecollection.BE;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Movie {
-private String title;
-private String category;
-private String filePath;
-public Date lastOpened;
-public float rating;
 
-public Movie(String title, String category, String filePath, String lastOpened, float rating){
-    this.title = title;
-    this.category = category;
-    this.filePath = filePath;
-    this.lastOpened = Time.valueOf(String.valueOf(lastOpened));
-    this.rating = rating;
+    private int id;
+    private String title;
+    private String category;
+    private String filePath;
+    public Date lastOpened;
+    public float rating;
 
-}
+    public Movie(int id, String title, String category, float rating, String filePath, Date lastOpened){
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.filePath = filePath;
+        this.lastOpened = lastOpened;
+        this.rating = rating;
+    }
 
     public Movie(String title, float rating) {
         this.title = title;
         this.rating = rating;
+        this.filePath = null;
+        this.lastOpened = null;
     }
 
     public String getTitle() {
-    return title;
+        return this.title;
     }
     public void setTitle(String title) {
-    this.title = title;
+        this.title = title;
     }
+
     public float getRating() {
-    return rating;
+        return this.rating;
     }
     public void setRating(float rating) {
-    this.rating = rating;
+        this.rating = rating;
     }
 
     public String getCategory() {
-    return category;
+        return this.category;
     }
     public void setCategory(String category) {
-    this.category = category;
+        this.category = category;
     }
+
     public String getFilePath() {
-    return filePath;
+        return this.filePath;
     }
     public void setFilePath(String filePath) {
-    this.filePath = filePath;
+        this.filePath = filePath;
     }
+
     public Date getLastOpened() {
-    return lastOpened;
+        return this.lastOpened;
     }
     public void setLastOpened(Date lastOpened) {
-    this.lastOpened = lastOpened;
+        this.lastOpened = lastOpened;
+    }
+
+    @Override
+    public String toString() {
+        return this.title;
     }
 }

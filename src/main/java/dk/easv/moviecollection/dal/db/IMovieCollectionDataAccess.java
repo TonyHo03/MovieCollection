@@ -11,7 +11,7 @@ public interface IMovieCollectionDataAccess {
 
     void deleteMovie(Movie movie) throws Exception;
 
-    void createCategory() throws Exception;
+    void createCategory(Category category) throws Exception;
 
     void deleteCategory(Category category) throws Exception;
 
