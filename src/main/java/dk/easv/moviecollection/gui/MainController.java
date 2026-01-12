@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -63,7 +64,7 @@ public class MainController implements Initializable {
 
         try {
             movieModel = new MovieModel();
-            tblMovies.setItems(MovieModel.getMovieObservableList());
+            tblMovies.setItems(movieModel.getMovieObservableList());
             lstCategories.setItems(movieModel.getCategoryObservableList());
         }
         catch (Exception e) {
@@ -86,10 +87,10 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("New Movie");
 
-            stage.initModality(Modality.APPLICATION_MODAL);
-
             AddMovieController addMovieController = fxmlLoader.getController();
             addMovieController.initializeClass(movieModel, stage);
+
+            stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.setScene(scene);
             stage.show();
@@ -126,7 +127,7 @@ public class MainController implements Initializable {
             //Search button indicates the filter is on
             btnSearch.setText("C");
 
-            FilteredList<Movie> filteredList = new FilteredList<>(MovieModel.getMovieObservableList());
+            FilteredList<Movie> filteredList = new FilteredList<>(movieModel.getMovieObservableList());
 
             filteredList.setPredicate(movie -> matchesFilter(movie, txtFldFilter.getText()) );
 
@@ -135,7 +136,7 @@ public class MainController implements Initializable {
 
             txtFldFilter.clear();
 
-            tblMovies.setItems(MovieModel.getMovieObservableList()); }
+            tblMovies.setItems(movieModel.getMovieObservableList()); }
 
         isFiltering = !isFiltering;
     }
@@ -170,7 +171,7 @@ public class MainController implements Initializable {
             try {
             movieModel.deleteCategory(selectedCategory);
 
-            System.out.println(MovieModel.getCategory());
+            System.out.println(movieModel.getCategoryObservableList());
         } catch (Exception e) {
                 e.printStackTrace();
             }

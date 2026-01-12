@@ -22,8 +22,42 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
         try (Connection conn = dbConnector.getConnection()) {
 
-            PreparedStatement preparedStatement = conn.prepareStatement(insertSql);
+            PreparedStatement preparedStatement = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, movie.getTitle());
+            preparedStatement.setFloat(2, movie.getRating());
+            preparedStatement.setString(3, movie.getFilePath());
+            preparedStatement.setDate(4, movie.getLastOpened());
+
             preparedStatement.executeUpdate();
+
+            try (ResultSet generatedId = preparedStatement.executeQuery();) {
+
+                int id = generatedId.getInt(1);
+
+                String[] categoryArray = movie.getCategory().split(":");
+
+                for (String category: categoryArray) {
+
+                    int categoryId = 0;
+
+                    PreparedStatement ps1 = conn.prepareStatement("SELECT id FROM Category WHERE name = ?");
+                    ps1.setString(1, category);
+                    ResultSet rs1 = ps1.executeQuery();
+
+                    if (rs1.next()) {
+
+                        categoryId = rs1.getInt("id");
+
+                    }
+
+                    PreparedStatement ps2 = conn.prepareStatement("INSERT INTO CatMovie (MovieId, CategoryId) VALUES (?,?)");
+                    ps2.setInt(1, id);
+                    ps2.setInt(2, categoryId);
+                    ps2.executeUpdate();
+
+                }
+
+            }
 
         }
         catch (SQLException e) {

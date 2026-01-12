@@ -1,9 +1,13 @@
 package dk.easv.moviecollection.gui;
 
-import dk.easv.moviecollection.dal.db.MovieCollectionDAO_DB;
+import dk.easv.moviecollection.BE.Category;
 import dk.easv.moviecollection.gui.model.MovieModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -12,31 +16,43 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class AddMovieController
+public class AddMovieController implements Initializable
 {
 
 
     private MovieModel movieModel;
     private Stage currentStage;
-    public MovieCollectionDAO_DB MovieDAO;
+
     @FXML
     private TextField txtMovieTitle, txtMovieFile;
 
     @FXML
-    private ComboBox<String> cbCategory1, cbCategory2, cbCategory3;
+    private ChoiceBox<Category> cbCategory1, cbCategory2, cbCategory3;
 
     @FXML
     private Slider sldrRating;
+
+    private ObservableList<Category> categoryList = FXCollections.observableArrayList();
 
     @FXML
     private void onChooseBtnClick() {
 
         FileChooser fileChooser = new FileChooser();
 
-        File chosenFile = fileChooser.showOpenDialog(null);
+        File chosenFile = fileChooser.showOpenDialog(currentStage);
+
+        if (chosenFile != null) {
+
+            txtMovieFile.setText(chosenFile.getPath());
+
+        }
 
     }
 
@@ -59,6 +75,22 @@ public class AddMovieController
 
         this.movieModel = movieModel;
         this.currentStage = stage;
+
+        comboBoxSetup();
+
+    }
+
+    public void comboBoxSetup() {
+
+        cbCategory1.setItems(movieModel.getCategoryObservableList());
+        cbCategory2.setItems(movieModel.getCategoryObservableList());
+        cbCategory3.setItems(movieModel.getCategoryObservableList());
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //.out.println("hello");
 
     }
 }
