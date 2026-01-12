@@ -7,6 +7,8 @@ import dk.easv.moviecollection.bll.MovieManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieModel {
@@ -80,6 +82,28 @@ public class MovieModel {
 
     }
 
+    public List<Movie> getStartupWarningMovies() {
+        List<Movie> result = new ArrayList<>();
+        LocalDate twoYearsAgo = LocalDate.now().minusYears(2);
+
+        for (Movie movie : movieObservableList) {
+            if (movie.getRating() > 6) {
+                continue;
+
+            }
+            if (movie.getLastOpened() == null) {
+                continue;
+            }
+
+            LocalDate lastOpenedDate = movie.getLastOpened().toLocalDate();
+            if (lastOpenedDate.isAfter(twoYearsAgo)) {
+                continue;
+            }
+
+            result.add(movie);
+        }
+        return result;
+    }
 }
 
 

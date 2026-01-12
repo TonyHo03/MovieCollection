@@ -25,8 +25,6 @@ import java.io.File;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -93,14 +91,6 @@ public class MainController implements Initializable {
                     Movie clickedMovie = row.getItem();
                     String path = clickedMovie.getFilePath();
                     System.out.println("Clicked");
-                    LocalDate today = LocalDate.now();
-                    clickedMovie.setLastOpened(Date.valueOf(today));
-                    try {
-                        movieModel.updateLastOpened(clickedMovie);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-
                     File movieFile = new File(path);
 
                     try {
@@ -240,9 +230,6 @@ public class MainController implements Initializable {
             }
         }
     }
-
-
-
 
     public void onDeleteMovieClick(ActionEvent actionEvent) {
         Movie selectedMovie = tblMovies.getFocusModel().getFocusedItem();
