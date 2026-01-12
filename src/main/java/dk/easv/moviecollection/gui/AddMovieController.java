@@ -39,8 +39,6 @@ public class AddMovieController implements Initializable
     @FXML
     private Slider sldrRating;
 
-    private ObservableList<Category> categoryList = FXCollections.observableArrayList();
-
     @FXML
     private void onChooseBtnClick() {
 
@@ -59,14 +57,16 @@ public class AddMovieController implements Initializable
     @FXML
     private void btnAddMovie(ActionEvent actionEvent) throws Exception {
 
-        String categories = cbCategory1.getValue() + ":" + cbCategory2.getValue() + ":" + cbCategory3.getValue();
+        if (!txtMovieFile.getText().isBlank()) {
+            String categories = cbCategory1.getValue() + "|" + cbCategory2.getValue() + "|" + cbCategory3.getValue();
 
-        Movie newMovie = new Movie(0, txtMovieTitle.getText(), categories, (float) sldrRating.getValue(), txtMovieFile.getText(), Date.valueOf(LocalDate.now()));
-        try {
-            movieModel.createMovie(newMovie);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+            Movie newMovie = new Movie(0, txtMovieTitle.getText(), categories, (float) sldrRating.getValue(), txtMovieFile.getText(), Date.valueOf(LocalDate.now()));
+            try {
+                movieModel.createMovie(newMovie);
+                currentStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -85,6 +85,10 @@ public class AddMovieController implements Initializable
         cbCategory1.setItems(movieModel.getCategoryObservableList());
         cbCategory2.setItems(movieModel.getCategoryObservableList());
         cbCategory3.setItems(movieModel.getCategoryObservableList());
+
+        cbCategory1.setValue(new Category(" "));
+        cbCategory2.setValue(new Category(" "));
+        cbCategory3.setValue(new Category(" "));
 
     }
 

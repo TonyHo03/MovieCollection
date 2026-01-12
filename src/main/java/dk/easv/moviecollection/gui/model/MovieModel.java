@@ -22,8 +22,8 @@ public class MovieModel {
 
         movieObservableList = FXCollections.observableArrayList();
         categoryObservableList = FXCollections.observableArrayList();
-        movieObservableList.setAll(loadMovies());
-        categoryObservableList.setAll(loadCategories());
+        movieObservableList.setAll(movieManager.loadMovies());
+        categoryObservableList.setAll(categoryManager.loadCategories());
 
     }
 
