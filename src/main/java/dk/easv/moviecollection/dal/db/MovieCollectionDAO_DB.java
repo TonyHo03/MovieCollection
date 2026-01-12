@@ -22,16 +22,50 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
         try (Connection conn = dbConnector.getConnection()) {
 
-            PreparedStatement preparedStatement = conn.prepareStatement(insertSql);
+            PreparedStatement preparedStatement = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, movie.getTitle());
+            preparedStatement.setFloat(2, movie.getRating());
+            preparedStatement.setString(3, movie.getFilePath());
+            preparedStatement.setDate(4, movie.getLastOpened());
+
             preparedStatement.executeUpdate();
 
+            try (ResultSet generatedId = preparedStatement.getGeneratedKeys();) {
+
+                if (generatedId.next()) {
+                    int id = generatedId.getInt(1);
+
+                    String[] categoryArray = movie.getCategory().split("\\|");
+
+                    for (String category : categoryArray) {
+                        System.out.println(category);
+                        if (!category.isBlank()) {
+                            int categoryId = 0;
+
+                            PreparedStatement ps1 = conn.prepareStatement("SELECT id FROM Category WHERE name = ?");
+                            ps1.setString(1, category);
+                            ResultSet rs1 = ps1.executeQuery();
+
+                            if (rs1.next()) {
+
+                                categoryId = rs1.getInt("id");
+
+                            }
+
+                            PreparedStatement ps2 = conn.prepareStatement("INSERT INTO CatMovie (MovieId, CategoryId) VALUES (?,?)");
+                            ps2.setInt(1, id);
+                            ps2.setInt(2, categoryId);
+                            ps2.executeUpdate();
+                        }
+                    }
+                }
+            }
         }
         catch (SQLException e) {
 
             throw new Exception("Could not create movie", e);
 
         }
-
     }
 
     @Override
@@ -108,12 +142,12 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
             while (rs.next())
             {
                 int id = rs.getInt("id");
-                String title = rs.getString("name");
+                String title = rs.getString("title");
                 float rating = rs.getFloat("rating");
                 String filelink = rs.getString("filelink");
                 Date lastOpened = rs.getDate("lastview");
 
-                PreparedStatement categorystmt = conn.prepareStatement("SELECT Category.Name FROM Category JOIN CatMovie ON Category.id = CatMovie.CategoryId JOIN Movie ON Movie.id = CatMovie.MovieId WHERE Movie.id = ?");
+                PreparedStatement categorystmt = conn.prepareStatement("SELECT Category.Name FROM dbo.Category JOIN CatMovie ON CatMovie.CategoryId = Category.id WHERE CatMovie.MovieId = ?");
                 categorystmt.setInt(1, id);
 
                 ResultSet rs2 = categorystmt.executeQuery();
@@ -121,22 +155,23 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
                 while (rs2.next()) {
 
-                    categories = rs.getString("Name") + ":";
+                    categories = categories + rs2.getString("name") + "|";
 
                 }
+
+                System.out.println(categories);
 
                 char[] catCharArray = categories.toCharArray();
 
                 if (catCharArray.length != 0) {
-                    if (catCharArray[catCharArray.length - 1] == ':') {
-                        char[] newCharArray = Arrays.copyOfRange(catCharArray, 0, catCharArray.length - 2);
+                    if (catCharArray[catCharArray.length - 1] == '|') {
+                        char[] newCharArray = Arrays.copyOfRange(catCharArray, 0, catCharArray.length - 1);
                         categories = String.valueOf(newCharArray);
                     }
                 }
                 else {
                     System.out.println("Har ingen genre.");
                 }
-                System.out.println(categories);
 
                 movies.add(new Movie(id, title, categories, rating, filelink, lastOpened));
 

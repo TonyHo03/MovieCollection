@@ -12,41 +12,26 @@ import java.util.List;
 public class MovieModel {
 
     private MovieManager movieManager = new MovieManager();
-    private static CategoryManager categoryManager;
+    private CategoryManager categoryManager = new CategoryManager();
 
-    static {
-        try {
-            categoryManager = new CategoryManager();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    private static ObservableList<Movie> movieObservableList;
-    private static ObservableList<Category> categoryObservableList;
+    private ObservableList<Movie> movieObservableList;
+    private ObservableList<Category> categoryObservableList;
 
     public MovieModel() throws Exception {
 
         movieObservableList = FXCollections.observableArrayList();
         categoryObservableList = FXCollections.observableArrayList();
-        movieObservableList.setAll(loadMovies());
-        categoryObservableList.setAll(loadCategories());
+        movieObservableList.setAll(movieManager.loadMovies());
+        categoryObservableList.setAll(categoryManager.loadCategories());
 
     }
 
-    public static ObservableList<Movie> getMovieObservableList() {
+    public ObservableList<Movie> getMovieObservableList() {
         return movieObservableList;
     }
 
-    public static List<Category> getCategory() {
-        return categoryObservableList;
-    }
-
     public ObservableList<Category> getCategoryObservableList() {
-        return categoryObservableList;
-    }
-
-    public ObservableList<Category> getObservableCategoryList() {
         return categoryObservableList;
     }
 
