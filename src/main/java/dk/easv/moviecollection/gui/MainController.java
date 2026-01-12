@@ -4,6 +4,7 @@ import dk.easv.moviecollection.BE.Category;
 import dk.easv.moviecollection.BE.Movie;
 import dk.easv.moviecollection.dal.db.MovieCollectionDAO_DB;
 import dk.easv.moviecollection.gui.model.MovieModel;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -58,6 +60,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Platform.runLater(this::showStartupWarningIfNeeded);
 
         clmTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         clmRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
@@ -198,5 +201,32 @@ public class MainController implements Initializable {
             }
         }
     }
+
+    private void showStartupWarningIfNeeded() {
+        List<Movie> warningMovies = movieModel.getStartupWarningMovies();
+        if (warningMovies.isEmpty())
+        {
+            return;
+        }
+        try
+        { FXMLLoader loader = new FXMLLoader( getClass().getResource
+                ("/dk/easv/moviecollection/StartupWarning.fxml") );
+
+                Scene scene = new Scene(loader.load());
+                Stage stage = new Stage();
+                stage.setTitle("Low rated movies that haven't been opened in 2 years");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initOwner(tblMovies.getScene().getWindow());
+                StartupWarningController controller = loader.getController();
+                controller.setMovies(warningMovies);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.show();
+        } catch
+        (Exception e)
+        { e.printStackTrace();
+        }
+    }
+
 }
 
