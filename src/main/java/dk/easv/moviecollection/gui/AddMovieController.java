@@ -51,7 +51,7 @@ public class AddMovieController implements Initializable
 
         int dotIndex = chosenFile.getName().lastIndexOf(".");
         if (chosenFile.getName().substring(dotIndex).equals(".mp4") || chosenFile.getName().substring(dotIndex).equals(".mpeg4")) {
-            txtMovieFile.setText(chosenFile.toPath().getFileName().toString());
+            txtMovieFile.setText(chosenFile.getPath());
 
         }
         else {
