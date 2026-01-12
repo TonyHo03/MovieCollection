@@ -68,6 +68,10 @@ public class MovieModel {
 
     }
 
+    public void updateLastOpened(Movie movie) throws Exception{
+        movieManager.updateLastOpened(movie);
+    }
+
 
 
     public List<Category> loadCategories() throws Exception {

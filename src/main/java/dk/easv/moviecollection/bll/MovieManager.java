@@ -26,4 +26,8 @@ public class MovieManager {
         movieDAO.createMovie(movie);
 
     }
+
+    public void updateLastOpened(Movie movie) throws Exception {
+        movieDAO.updateLastOpened(movie);
+    }
 }

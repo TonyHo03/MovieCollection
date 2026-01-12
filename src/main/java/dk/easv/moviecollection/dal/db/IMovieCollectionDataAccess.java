@@ -18,4 +18,6 @@ public interface IMovieCollectionDataAccess {
     List<Movie> loadMovies();
 
     List<Category> loadCategories();
+
+    void updateLastOpened(Movie movie) throws Exception;
 }

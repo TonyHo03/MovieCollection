@@ -66,7 +66,7 @@ public class AddMovieController implements Initializable
         if (!txtMovieFile.getText().isBlank()) {
             String categories = cbCategory1.getValue() + "|" + cbCategory2.getValue() + "|" + cbCategory3.getValue();
 
-            Movie newMovie = new Movie(0, txtMovieTitle.getText(), categories, (float) sldrRating.getValue(), txtMovieFile.getText(), Date.valueOf(LocalDate.now()));
+            Movie newMovie = new Movie(0, txtMovieTitle.getText(), categories, (float) sldrRating.getValue(), txtMovieFile.getText(), null);
             try {
                 movieModel.createMovie(newMovie);
                 currentStage.close();

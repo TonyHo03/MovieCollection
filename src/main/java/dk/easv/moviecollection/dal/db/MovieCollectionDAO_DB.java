@@ -1,5 +1,6 @@
 package dk.easv.moviecollection.dal.db;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.easv.moviecollection.BE.Category;
 import dk.easv.moviecollection.BE.Movie;
 
@@ -190,7 +191,20 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
     }
 
 
-    @Override
+    public void updateLastOpened (Movie movie){
+        String sql = "UPDATE Movie SET lastview = ?";
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setDate(1, movie.getLastOpened());
+        ps.executeUpdate();
+
+    } catch (SQLServerException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }}
+
+        @Override
     public List<Category> loadCategories() {
         //a list to store the categories loaded from database
         List<Category> categories = new ArrayList<>();
