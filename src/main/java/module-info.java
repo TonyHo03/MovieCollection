@@ -1,4 +1,5 @@
 module dk.easv.moviecollection {
+
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -6,6 +7,8 @@ module dk.easv.moviecollection {
     requires javafx.base;
     requires com.microsoft.sqlserver.jdbc;
     requires javafx.graphics;
+    requires java.desktop;
+    //requires javafx.media;
 
     opens dk.easv.moviecollection to javafx.fxml;
     exports dk.easv.moviecollection;

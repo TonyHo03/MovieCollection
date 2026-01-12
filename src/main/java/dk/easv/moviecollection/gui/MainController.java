@@ -14,9 +14,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.awt.Desktop;
+//import javafx.scene.layout.BorderPane;
+//import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.MediaView;
+//import javafx.scene.media.Media;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.io.File;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -68,18 +75,58 @@ public class MainController implements Initializable {
 
 
 
-        try {
-            movieModel = new MovieModel();
-            tblMovies.setItems(movieModel.getMovieObservableList());
-            lstCategories.setItems(movieModel.getCategoryObservableList());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+                try {
+                    movieModel = new MovieModel();
+                    tblMovies.setItems(movieModel.getMovieObservableList());
+                    lstCategories.setItems(movieModel.getCategoryObservableList());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+        tblMovies.setRowFactory(tv -> {
+            TableRow<Movie> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Movie clickedMovie = row.getItem();
+                    String path = clickedMovie.getFilePath();
+                    System.out.println("Clicked");
+                    File movieFile = new File(path);
+
+                    try {
+                        if (Desktop.isDesktopSupported()) {
+                            Desktop.getDesktop().open(movieFile);
+                        } else {
+                            System.out.println("Desktop not supported");
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    /*
+                    Media media = new Media(new File(path).toURI().toString());
+                    MediaPlayer mediaPlayer = new MediaPlayer(media);
+                    MediaView mediaView = new MediaView(mediaPlayer);
+                    Stage stage = new Stage();
+                    stage.setTitle(clickedMovie.getTitle());
+                    BorderPane root = new BorderPane(mediaView);
+                    Scene scene = new Scene(root, 800, 600); stage.setScene(scene); stage.show(); mediaPlayer.play();*/
+
+
+
+                }
+            });
+
+            return row;
+        });
+
+
 
 
 
     }
+
 
     @FXML
     protected void onHelloButtonClick() {
