@@ -62,6 +62,14 @@ public class MovieModel {
 
     }
 
+    public void deleteMovie(Movie movie) throws Exception {
+
+        movieManager.deleteMovie(movie);
+
+    }
+
+
+
     public List<Category> loadCategories() throws Exception {
 
         return categoryManager.loadCategories();

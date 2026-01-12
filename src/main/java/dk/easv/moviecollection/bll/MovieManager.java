@@ -20,4 +20,10 @@ public class MovieManager {
     public void deleteMovie(Movie movie) throws Exception {
         movieDAO.deleteMovie(movie);
     }
+
+    public void createMovie(Movie movie) throws Exception {
+
+        movieDAO.createMovie(movie);
+
+    }
 }
