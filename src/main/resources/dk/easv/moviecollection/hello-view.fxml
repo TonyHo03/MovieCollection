@@ -19,8 +19,9 @@
        <Button layoutX="638.0" layoutY="44.0" onAction="#onHelloButtonClick" text="Rate" />
       <TableView fx:id="tblMovies" layoutX="264.0" layoutY="141.0" prefHeight="378.0" prefWidth="414.0">
         <columns>
-          <TableColumn fx:id="clmTitle" prefWidth="245.60003662109375" text="Title" />
-            <TableColumn fx:id="clmRating" prefWidth="56.0" text="Score" />
+          <TableColumn fx:id="clmTitle" prefWidth="206.5" text="Title" />
+            <TableColumn fx:id="clmGenre" prefWidth="206.5" text="Genre" />
+            <TableColumn fx:id="clmRating" prefWidth="68.5" text="Score" />
             <TableColumn fx:id="clmFilelink" prefWidth="75.0" text="Filelink" />
             <TableColumn fx:id="clmLastView" prefWidth="75.0" text="LastView" />
         </columns>

@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -45,11 +47,15 @@ public class AddMovieController implements Initializable
         FileChooser fileChooser = new FileChooser();
 
         File chosenFile = fileChooser.showOpenDialog(currentStage);
+        if (chosenFile == null) {return;}
 
-        if (chosenFile != null) {
+        int dotIndex = chosenFile.getName().lastIndexOf(".");
+        if (chosenFile.getName().substring(dotIndex).equals(".mp4") || chosenFile.getName().substring(dotIndex).equals(".mpeg4")) {
+            txtMovieFile.setText(chosenFile.toPath().getFileName().toString());
 
-            txtMovieFile.setText(chosenFile.getPath());
-
+        }
+        else {
+            txtMovieFile.setText("Filetype must be .mp4 or .mpeg4");
         }
 
     }

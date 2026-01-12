@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
     private DBConnector dbConnector = new DBConnector();

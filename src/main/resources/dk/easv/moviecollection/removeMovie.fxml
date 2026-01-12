@@ -73,7 +73,7 @@
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="149.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#btnAddMovie" text="Remove Movie">
+                                    <Button mnemonicParsing="false" onAction="#onBtnAddMovie" text="Remove Movie">
                                        <HBox.margin>
                                           <Insets left="120.0" />
                                        </HBox.margin>

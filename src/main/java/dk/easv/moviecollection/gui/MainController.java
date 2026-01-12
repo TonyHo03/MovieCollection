@@ -32,7 +32,7 @@ public class MainController implements Initializable {
     @FXML
     private ListView<Category> lstCategories;
     @FXML
-    private TableColumn<Movie, String> clmTitle, clmGenre;
+    private TableColumn<Movie, String> clmTitle, clmGenre, clmFilelink, clmLastView;
     @FXML
     private TableColumn<Movie, Float> clmRating;
     @FXML
@@ -62,6 +62,11 @@ public class MainController implements Initializable {
         clmTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         clmRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         clmGenre.setCellValueFactory(new PropertyValueFactory<>("category"));
+        clmFilelink.setCellValueFactory(new PropertyValueFactory<>("filePath"));
+        clmLastView.setCellValueFactory(new PropertyValueFactory<>("lastOpened"));
+
+
+
 
         try {
             movieModel = new MovieModel();

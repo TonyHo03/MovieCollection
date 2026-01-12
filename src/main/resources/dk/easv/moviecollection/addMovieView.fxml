@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.moviecollection.gui.AddMovieController">
    <children>
@@ -20,7 +21,10 @@
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                      <Label layoutX="17.0" layoutY="38.0" prefHeight="17.0" prefWidth="29.0" text="File: " />
-                     <TextField fx:id="txtMovieFile" disable="true" layoutX="75.0" layoutY="34.0" prefHeight="25.0" prefWidth="160.0" />
+                     <TextField fx:id="txtMovieFile" disable="true" layoutX="75.0" layoutY="34.0" prefHeight="25.0" prefWidth="160.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font></TextField>
                      <Button layoutX="239.0" layoutY="34.0" mnemonicParsing="false" onAction="#onChooseBtnClick" prefHeight="25.0" prefWidth="57.0" text="Choose" />
                      <Label layoutX="17.0" layoutY="75.0" prefHeight="17.0" prefWidth="29.0" text="Title: " />
                      <TextField fx:id="txtMovieTitle" layoutX="75.0" layoutY="71.0" prefHeight="25.0" prefWidth="160.0" />

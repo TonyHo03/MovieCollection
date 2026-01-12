@@ -1,13 +1,14 @@
 package dk.easv.moviecollection.BE;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Movie {
-private String title;
-private String category;
-private String filePath;
-public Date lastOpened;
-public Float rating;
+    private int id;
+    private String title;
+    private String category;
+    private String filePath;
+    public Date lastOpened;
+    public Float rating;
 
 
     public Movie(String title, Float rating, String filePath, Date lastOpened) {
@@ -18,6 +19,17 @@ public Float rating;
     }
 
     public Movie() {
+
+    }
+
+    public Movie(int id, String title, String categories, float rating, String filelink, Date lastOpened) {
+
+        this.id = id;
+        this.title = title;
+        this.category = categories;
+        this.rating = rating;
+        this.filePath = filelink;
+        this.lastOpened = lastOpened;
 
     }
 
