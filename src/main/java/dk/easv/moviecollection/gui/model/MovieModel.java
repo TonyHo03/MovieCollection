@@ -14,19 +14,20 @@ public class MovieModel {
     private MovieManager movieManager = new MovieManager();
     private CategoryManager categoryManager = new CategoryManager();
 
-    private static ObservableList<Movie> movieObservableList;
+
+    private ObservableList<Movie> movieObservableList;
     private ObservableList<Category> categoryObservableList;
 
     public MovieModel() throws Exception {
 
         movieObservableList = FXCollections.observableArrayList();
         categoryObservableList = FXCollections.observableArrayList();
-        movieObservableList.setAll(loadMovies());
-        categoryObservableList.setAll(loadCategories());
+        movieObservableList.setAll(movieManager.loadMovies());
+        categoryObservableList.setAll(categoryManager.loadCategories());
 
     }
 
-    public static ObservableList<Movie> getMovieObservableList() {
+    public ObservableList<Movie> getMovieObservableList() {
         return movieObservableList;
     }
 
@@ -34,6 +35,19 @@ public class MovieModel {
         return categoryObservableList;
     }
 
+    public void createCategory(Category category) throws Exception {
+
+        categoryManager.createCategory(category);
+
+        categoryObservableList.add(category);
+
+    }
+
+    public void deleteCategory(Category category) throws Exception {
+        categoryManager.deleteCategory(category);
+
+        categoryObservableList.remove(category);
+    }
 
 
     public List<Movie> loadMovies() throws Exception {
@@ -41,6 +55,20 @@ public class MovieModel {
         return movieManager.loadMovies();
 
     }
+
+    public void createMovie(Movie movie) throws Exception {
+
+        movieManager.createMovie(movie);
+
+    }
+
+    public void deleteMovie(Movie movie) throws Exception {
+
+        movieManager.deleteMovie(movie);
+
+    }
+
+
 
     public List<Category> loadCategories() throws Exception {
 

@@ -9,11 +9,11 @@ public interface IMovieCollectionDataAccess {
 
     void createMovie(Movie movie) throws Exception;
 
-    void deleteMovie() throws Exception;
+    void deleteMovie(Movie movie) throws Exception;
 
-    void createCategory() throws Exception;
+    void createCategory(Category category) throws Exception;
 
-    void deleteCategory() throws Exception;
+    void deleteCategory(Category category) throws Exception;
 
     List<Movie> loadMovies();
 
