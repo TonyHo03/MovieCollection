@@ -75,9 +75,6 @@ public class MainController implements Initializable {
         clmFilelink.setCellValueFactory(new PropertyValueFactory<>("filePath"));
         clmLastView.setCellValueFactory(new PropertyValueFactory<>("lastOpened"));
 
-
-
-
                 try {
                     movieModel = new MovieModel();
                     tblMovies.setItems(movieModel.getMovieObservableList());
