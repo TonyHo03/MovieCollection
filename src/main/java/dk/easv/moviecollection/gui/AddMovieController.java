@@ -40,6 +40,8 @@ public class AddMovieController implements Initializable
 
     @FXML
     private Slider sldrRating;
+    @FXML
+    private Slider sldrRating1;
 
     @FXML
     private void onChooseBtnClick() {
@@ -102,5 +104,9 @@ public class AddMovieController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         //.out.println("hello");
 
+    }
+
+    @FXML
+    private void btnNewRatingSet(ActionEvent actionEvent) {
     }
 }

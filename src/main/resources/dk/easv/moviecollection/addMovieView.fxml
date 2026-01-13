@@ -39,6 +39,16 @@
                   </AnchorPane>
          </content>
        </Tab>
+            <Tab text="Edit rating">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Slider fx:id="sldrRating1" blockIncrement="1.0" layoutX="75.0" layoutY="111.0" majorTickUnit="1.0" max="10.0" prefHeight="33.0" prefWidth="160.0" showTickLabels="true" />
+                        <Button layoutX="102.0" layoutY="167.0" mnemonicParsing="false" onAction="#btnNewRatingSet" prefHeight="32.0" prefWidth="105.0" text="New rating" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
      </tabs>
    </TabPane>
    </children>

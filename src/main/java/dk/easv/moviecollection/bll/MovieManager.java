@@ -22,7 +22,6 @@ public class MovieManager {
     }
 
     public void createMovie(Movie movie) throws Exception {
-
         movieDAO.createMovie(movie);
 
     }
