@@ -73,21 +73,23 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
     @Override
     public void deleteMovie(Movie movie) throws Exception {
         try (Connection conn = dbConnector.getConnection()) {
-            int movieId = 0;
+            /*int movieId = 0;
 
-            PreparedStatement stmt1 = conn.prepareStatement("SELECT Id FROM dbo.Movie WHERE name = ?");
+            PreparedStatement stmt1 = conn.prepareStatement("SELECT Id FROM dbo.Movie WHERE title = ?");
             stmt1.setString(1,movie.getTitle());
             ResultSet rs1 = stmt1.executeQuery();
 
             if (rs1.next()) {
                 movieId = rs1.getInt("Id");
-            }
+            }*/
+
+
             PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM dbo.CatMovie WHERE MovieId = ?");
-            stmt2.setInt(1,movieId);
+            stmt2.setInt(1,movie.getId());
             stmt2.executeUpdate();
 
             PreparedStatement stmt3 = conn.prepareStatement("DELETE FROM dbo.Movie WHERE Id = ?");
-            stmt3.setInt(1,movieId);
+            stmt3.setInt(1,movie.getId());
             stmt3.executeUpdate();
         }
     }

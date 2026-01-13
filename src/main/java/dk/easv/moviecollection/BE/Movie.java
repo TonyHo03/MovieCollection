@@ -18,10 +18,6 @@ public class Movie {
         this.lastOpened = lastOpened;
     }
 
-    public Movie() {
-
-    }
-
     public Movie(int id, String title, String categories, float rating, String filelink, Date lastOpened) {
 
         this.id = id;
@@ -33,34 +29,43 @@ public class Movie {
 
     }
 
+    public int getId() {
+        return this.id;
+    }
 
     public String getTitle() {
-    return title;
+        return this.title;
     }
     public void setTitle(String title) {
-    this.title = title;
+        this.title = title;
     }
-            public Float getRating() {
-    return rating;
+
+    public Float getRating() {
+        return rating;
     }
     public void setRating(Float rating) {
-    this.rating = rating;
+        this.rating = rating;
     }
 
     public String getCategory() {
-    return category;
+        return category;
     }
     public void setCategory(String category) {
-    this.category = category;
+        this.category = category;
     }
+
     public String getFilePath() {
-    return filePath;
+        return filePath;
     }
     public void setFilePath(String filePath) {
-    this.filePath = filePath;
+        this.filePath = filePath;
     }
+
     public Date getLastOpened() {
-    return lastOpened;
+        return lastOpened;
+    }
+    public void setLastOpened(Date lastOpened) {
+        this.lastOpened = lastOpened;
     }
     public int getId(){return id;}
 
@@ -69,7 +74,4 @@ public class Movie {
         return this.title;
     }
 
-    public void setLastOpened(Date lastOpened) {
-    this.lastOpened = lastOpened;
-    }
 }
