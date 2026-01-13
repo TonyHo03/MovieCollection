@@ -62,11 +62,15 @@ public class MovieModel {
 
         movieManager.createMovie(movie);
 
+        movieObservableList.add(movie);
+
     }
 
     public void deleteMovie(Movie movie) throws Exception {
 
         movieManager.deleteMovie(movie);
+
+        movieObservableList.remove(movie);
 
     }
 

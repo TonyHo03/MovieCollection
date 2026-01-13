@@ -13,7 +13,7 @@
    
           <Label fx:id="welcomeText" />
       <Button layoutX="264.0" layoutY="525.0" mnemonicParsing="false" onAction="#btnOnNewMovie" text="Add a movie" />
-      <Button layoutX="365.0" layoutY="526.0" mnemonicParsing="false" text="Remove a movie" />
+      <Button layoutX="365.0" layoutY="526.0" mnemonicParsing="false" onAction="#onDeleteMovieClick" text="Remove a movie" />
       <Button layoutX="14.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnOnNewCategory" text="Add a category" />
       <Button layoutX="131.0" layoutY="525.0" mnemonicParsing="false" onAction="#onDeleteCategoryClick" prefHeight="26.0" prefWidth="118.0" text="Delete Category" />
        <Button layoutX="638.0" layoutY="44.0" onAction="#onHelloButtonClick" text="Rate" />
