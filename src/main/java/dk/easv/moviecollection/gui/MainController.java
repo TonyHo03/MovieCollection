@@ -24,7 +24,13 @@ import javafx.stage.Stage;
 import java.io.File;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -91,6 +97,15 @@ public class MainController implements Initializable {
                     Movie clickedMovie = row.getItem();
                     String path = clickedMovie.getFilePath();
                     System.out.println("Clicked");
+
+                    try {
+                        clickedMovie.setLastOpened(Date.valueOf(LocalDate.now()));
+                        movieModel.updateLastOpened(clickedMovie);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
+
                     File movieFile = new File(path);
 
                     try {
@@ -244,6 +259,10 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void lookupMovies(ActionEvent actionEvent) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://www.imdb.com/"));
     }
 }
 

@@ -192,17 +192,17 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
 
     public void updateLastOpened (Movie movie){
-        String sql = "UPDATE Movie SET lastview = ?";
+        String sql = "UPDATE dbo.Movie SET lastview = ? WHERE id = ?";
         try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setDate(1, movie.getLastOpened());
-        ps.executeUpdate();
-
-    } catch (SQLServerException e) {
-            throw new RuntimeException(e);
+            ps.setDate(1, movie.getLastOpened());
+            ps.setInt(2, movie.getId());
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }}
+        }
+
+    }
 
         @Override
     public List<Category> loadCategories() {
