@@ -94,13 +94,16 @@ public class MainController implements Initializable {
         tblMovies.setRowFactory(tv -> {
             TableRow<Movie> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                if (event.getClickCount() == 2  && !row.isEmpty()) {
                     Movie clickedMovie = row.getItem();
                     String path = clickedMovie.getFilePath();
                     System.out.println("Clicked");
 
                     try {
+
                         clickedMovie.setLastOpened(Date.valueOf(LocalDate.now()));
+                        System.out.println("Setting lastOpened to: " + clickedMovie.getLastOpened());
+
                         movieModel.updateLastOpened(clickedMovie);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
