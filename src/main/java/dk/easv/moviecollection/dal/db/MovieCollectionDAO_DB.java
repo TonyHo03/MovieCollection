@@ -177,7 +177,7 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
                     System.out.println("Har ingen genre.");
                 }
 
-                movies.add(new Movie(id, title, rating, filelink, lastOpened));
+                movies.add(new Movie(id, title, categories, rating, filelink, lastOpened));
 
             }
 

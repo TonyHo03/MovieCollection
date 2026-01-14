@@ -75,7 +75,9 @@ public class MovieModel {
     }
 
     public void updateLastOpened(Movie movie) throws Exception{
+
         movieManager.updateLastOpened(movie);
+
     }
 
 

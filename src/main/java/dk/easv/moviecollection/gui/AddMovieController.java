@@ -83,7 +83,7 @@ public class AddMovieController implements Initializable
         this.movieModel = movieModel;
         this.currentStage = stage;
 
-        comboBoxSetup();
+        //comboBoxSetup();
 
     }
 

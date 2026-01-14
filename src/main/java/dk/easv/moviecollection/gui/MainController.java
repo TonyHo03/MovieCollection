@@ -59,11 +59,15 @@ public class MainController implements Initializable {
     private TextField txtFldFilter;
 
     private boolean isFiltering = false;
+    private ObservableList<Movie> movieList;
+    private ObservableList<Category> categoryList;
 
     public MainController() {
 
         try {
             movieModel = new MovieModel();
+            movieList = movieModel.getMovieObservableList();
+            categoryList = movieModel.getCategoryObservableList();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -85,13 +89,47 @@ public class MainController implements Initializable {
         clmFilelink.setCellValueFactory(new PropertyValueFactory<>("filePath"));
         clmLastView.setCellValueFactory(new PropertyValueFactory<>("lastOpened"));
 
-                try {
-                    movieModel = new MovieModel();
-                    tblMovies.setItems(movieModel.getMovieObservableList());
-                    lstCategories.setItems(movieModel.getCategoryObservableList());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        try {
+            tblMovies.setItems(movieList);
+            lstCategories.setItems(categoryList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        lstCategories.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->  {
+
+            if (newValue != null) {
+
+                FilteredList<Movie> filteredList = new FilteredList<>(movieList);
+
+                filteredList.setPredicate(movie -> {
+
+                    String[] categories = movie.getCategory().split("\\|");
+
+                    for (String category: categories) {
+
+                        if (newValue.getName().equals(category)) {
+                            System.out.println("Matching Category");
+                            return true;
+
+                        }
+                    }
+
+                    return false;
+
+                });
+
+                tblMovies.setItems(filteredList);
+
+            }
+            else {
+
+                movieList = movieModel.getMovieObservableList();
+                tblMovies.setItems(movieList);
+
+            }
+
+        }));
 
 
         tblMovies.setRowFactory(tv -> {
@@ -102,22 +140,19 @@ public class MainController implements Initializable {
                     String path = clickedMovie.getFilePath();
                     System.out.println("Clicked");
 
-                    try {
-
-                        clickedMovie.setLastOpened(Date.valueOf(LocalDate.now()));
-                        System.out.println("Setting lastOpened to: " + clickedMovie.getLastOpened());
-
-                        movieModel.updateLastOpened(clickedMovie);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-
 
                     File movieFile = new File(path);
 
                     try {
                         if (Desktop.isDesktopSupported()) {
+
                             Desktop.getDesktop().open(movieFile);
+
+                            clickedMovie.setLastOpened(Date.valueOf(LocalDate.now()));
+                            System.out.println("Setting lastOpened to: " + clickedMovie.getLastOpened());
+
+                            movieModel.updateLastOpened(clickedMovie);
+
                         } else {
                             System.out.println("Desktop not supported");
                         }
@@ -126,27 +161,11 @@ public class MainController implements Initializable {
                         e.printStackTrace();
                     }
 
-                    /*
-                    Media media = new Media(new File(path).toURI().toString());
-                    MediaPlayer mediaPlayer = new MediaPlayer(media);
-                    MediaView mediaView = new MediaView(mediaPlayer);
-                    Stage stage = new Stage();
-                    stage.setTitle(clickedMovie.getTitle());
-                    BorderPane root = new BorderPane(mediaView);
-                    Scene scene = new Scene(root, 800, 600); stage.setScene(scene); stage.show(); mediaPlayer.play();*/
-
-
-
                 }
             });
 
             return row;
         });
-
-
-
-
-
     }
 
 
@@ -171,7 +190,7 @@ public class MainController implements Initializable {
             stage.show();
         }
         catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -194,6 +213,8 @@ public class MainController implements Initializable {
 
         }
     }
+
+
 
     @FXML
     private void onSearchBtnClick() {
