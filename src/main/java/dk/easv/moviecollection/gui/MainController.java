@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,7 +120,10 @@ public class MainController implements Initializable {
 
                 });
 
-                tblMovies.setItems(filteredList);
+                SortedList<Movie> sortedList = new SortedList<>(filteredList);
+                sortedList.comparatorProperty().bind(tblMovies.comparatorProperty());
+
+                tblMovies.setItems(sortedList);
 
             }
             else {
@@ -152,6 +156,8 @@ public class MainController implements Initializable {
                             System.out.println("Setting lastOpened to: " + clickedMovie.getLastOpened());
 
                             movieModel.updateLastOpened(clickedMovie);
+
+                            tblMovies.refresh();
 
                         } else {
                             System.out.println("Desktop not supported");
