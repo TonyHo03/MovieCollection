@@ -43,6 +43,9 @@ public class MainController implements Initializable {
     private Label welcomeText;
 
     @FXML
+    private Slider sldrVeryNewRating;
+
+    @FXML
     private TableView<Movie> tblMovies;
     @FXML
     private ListView<Category> lstCategories;
@@ -269,7 +272,17 @@ public class MainController implements Initializable {
         Desktop.getDesktop().browse(new URI("https://www.imdb.com/"));
     }
 
-
+    public void onRateClick(ActionEvent actionEvent) throws Exception {
+        Movie selectedMovie = tblMovies.getSelectionModel().getSelectedItem();
+        if (selectedMovie == null) {
+            System.out.println("No movies selected, asshole");
+            return;
+        }
+        float newRating = (float) sldrVeryNewRating.getValue();
+        selectedMovie.setRating(newRating);
+        movieModel.updateRating(selectedMovie);
+        tblMovies.refresh();
+    }
 
     private void showStartupWarningIfNeeded() {
         List<Movie> warningMovies = movieModel.getStartupWarningMovies();
