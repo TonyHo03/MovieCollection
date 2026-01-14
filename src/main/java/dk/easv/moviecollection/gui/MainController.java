@@ -261,7 +261,7 @@ public class MainController implements Initializable {
 
 
     public void onDeleteCategoryClick(ActionEvent actionEvent) {
-        Category selectedCategory = lstCategories.getFocusModel().getFocusedItem();
+        Category selectedCategory = lstCategories.getSelectionModel().getSelectedItem();
 
         if (selectedCategory != null) {
             try {
@@ -275,7 +275,7 @@ public class MainController implements Initializable {
     }
 
     public void onDeleteMovieClick(ActionEvent actionEvent) {
-        Movie selectedMovie = tblMovies.getFocusModel().getFocusedItem();
+        Movie selectedMovie = tblMovies.getSelectionModel().getSelectedItem();
 
         if (selectedMovie != null) {
             try {
