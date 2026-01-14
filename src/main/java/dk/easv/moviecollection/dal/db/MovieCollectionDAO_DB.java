@@ -177,7 +177,7 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
                     System.out.println("Har ingen genre.");
                 }
 
-                movies.add(new Movie(id, title, categories, rating, filelink, lastOpened));
+                movies.add(new Movie(id, title, rating, filelink, lastOpened));
 
             }
 
@@ -194,11 +194,14 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
 
     public void updateLastOpened (Movie movie){
-        String sql = "UPDATE dbo.Movie SET lastview = ? WHERE id = ?";
+        String sql = "UPDATE dbo.Movie SET lastview = ? WHERE title = ?";
         try (Connection conn = dbConnector.getConnection()) {
+            System.out.println("Updating movie ID: " + movie.getId());
+            System.out.println("New lastOpened value: " + movie.getLastOpened());
+
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDate(1, movie.getLastOpened());
-            ps.setInt(2, movie.getId());
+            ps.setString(2, movie.getTitle());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

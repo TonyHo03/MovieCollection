@@ -11,12 +11,7 @@ public class Movie {
     public Float rating;
 
 
-    public Movie(String title, Float rating, String filePath, Date lastOpened) {
-        this.title = title;
-        this.rating = rating;
-        this.filePath = filePath;
-        this.lastOpened = lastOpened;
-    }
+
 
     public Movie(int id, String title, String categories, float rating, String filelink, Date lastOpened) {
 
@@ -29,9 +24,15 @@ public class Movie {
 
     }
 
-    public int getId() {
-        return this.id;
+    public Movie(int id, String title, float rating, String filePath, Date lastOpened) {
+        this.id = id;
+        this.title = title;
+        this.rating = rating;
+        this.filePath = filePath;
+        this.lastOpened = lastOpened;
     }
+
+
 
     public String getTitle() {
         return this.title;
@@ -67,6 +68,11 @@ public class Movie {
     public void setLastOpened(Date lastOpened) {
         this.lastOpened = lastOpened;
     }
+
+    public int getId(){
+        return id;
+    }
+
 
     @Override
     public String toString() {
