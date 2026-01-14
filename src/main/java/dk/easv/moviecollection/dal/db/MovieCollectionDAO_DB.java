@@ -228,6 +228,21 @@ public class MovieCollectionDAO_DB implements IMovieCollectionDataAccess {
 
         return categories;
     }
+    public void updateRating(Movie movie) throws Exception {
+        String sql = "UPDATE dbo.Movie SET rating = ? WHERE id = ?";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setFloat(1, movie.getRating());
+            stmt.setInt(2, movie.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

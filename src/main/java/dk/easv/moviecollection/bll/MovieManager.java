@@ -30,4 +30,9 @@ public class MovieManager {
     public void updateLastOpened(Movie movie) throws Exception {
         movieDAO.updateLastOpened(movie);
     }
+
+    public void updateRating(Movie movie) throws Exception {
+        movieDAO.updateRating(movie);
+    }
+
 }

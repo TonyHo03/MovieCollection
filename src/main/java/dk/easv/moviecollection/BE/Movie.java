@@ -67,7 +67,6 @@ public class Movie {
     public void setLastOpened(Date lastOpened) {
         this.lastOpened = lastOpened;
     }
-    public int getId(){return id;}
 
     @Override
     public String toString() {

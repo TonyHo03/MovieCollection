@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -16,7 +17,7 @@
       <Button layoutX="365.0" layoutY="526.0" mnemonicParsing="false" onAction="#onDeleteMovieClick" text="Remove a movie" />
       <Button layoutX="14.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnOnNewCategory" text="Add a category" />
       <Button layoutX="131.0" layoutY="525.0" mnemonicParsing="false" onAction="#onDeleteCategoryClick" prefHeight="26.0" prefWidth="118.0" text="Delete Category" />
-       <Button layoutX="638.0" layoutY="44.0" onAction="#onHelloButtonClick" text="Rate" />
+       <Button layoutX="638.0" layoutY="44.0" onAction="#onRateClick" text="Rate" />
       <TableView fx:id="tblMovies" layoutX="264.0" layoutY="141.0" prefHeight="378.0" prefWidth="414.0">
         <columns>
           <TableColumn fx:id="clmTitle" prefWidth="112.5" text="Title" />
@@ -31,8 +32,8 @@
       </TableView>
       <ListView fx:id="lstCategories" layoutX="14.0" layoutY="141.0" prefHeight="378.0" prefWidth="233.0" />
       <TextField fx:id="txtFldFilter" layoutX="264.0" layoutY="107.0" prefHeight="26.0" prefWidth="202.0" promptText="&lt;movie name&gt;" />
-      <TextField layoutX="482.0" layoutY="44.0" promptText="&lt;Give score&gt;" />
       <Button fx:id="btnSearch" layoutX="471.0" layoutY="108.0" mnemonicParsing="false" onAction="#onSearchBtnClick" text="Search" />
       <Button fx:id="btnLookupMovies" layoutX="482.0" layoutY="526.0" mnemonicParsing="false" onAction="#lookupMovies" text="Lookup IMDB movies " />
+      <Slider fx:id="sldrVeryNewRating" blockIncrement="1.0" layoutX="471.0" layoutY="40.0" majorTickUnit="1.0" max="10.0" prefHeight="33.0" prefWidth="160.0" showTickLabels="true" />
    </children>
 </AnchorPane>

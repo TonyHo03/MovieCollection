@@ -108,6 +108,10 @@ public class MovieModel {
         }
         return result;
     }
+    public void updateRating(Movie movie) throws Exception {
+        movieManager.updateRating(movie);
+
+    }
 }
 
 

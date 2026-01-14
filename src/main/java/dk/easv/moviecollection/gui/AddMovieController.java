@@ -35,6 +35,7 @@ public class AddMovieController implements Initializable
     @FXML
     private TextField txtMovieTitle, txtMovieFile;
 
+
     @FXML
     private ChoiceBox<Category> cbCategory1, cbCategory2, cbCategory3;
 
@@ -103,4 +104,5 @@ public class AddMovieController implements Initializable
         //.out.println("hello");
 
     }
+
 }
